@@ -91,6 +91,8 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
             sql.append(" where ").append(String.join(" and ", conditions));
         }
 
+        log.info("sql = {}", sql);
+
         return template.query(sql.toString(), new BeanPropertyRowMapper<>(Item.class), params.toArray());
     }
 
