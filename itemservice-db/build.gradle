@@ -28,6 +28,9 @@ dependencies {
 	// JdbcTemplate
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
+    //MyBatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+
 	// H2
 	runtimeOnly 'com.h2database:h2'
 
