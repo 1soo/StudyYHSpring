@@ -46,14 +46,9 @@ public class JpaItemRepository implements ItemRepository {
     public List<Item> findAll(ItemSearchCond cond) {
         String jpql = "select i from Item i where 1 = 1";
 
-        if(StringUtils.hasText(cond.getItemName())) jpql += " and i.itemName like concat('%', :itemName, '%')";
-        if(cond.getMaxPrice() != null) jpql += " and i.price <= :maxPrice";
+        if(StringUtils.hasText(cond.getItemName())) jpql += " and i.itemName like concat('%', '" + cond.getItemName() + "', '%')";
+        if(cond.getMaxPrice() != null) jpql += " and i.price <= " + cond.getMaxPrice();
 
-        TypedQuery<Item> query = em.createQuery(jpql, Item.class);
-
-        if(StringUtils.hasText(cond.getItemName())) query.setParameter("itemName", cond.getItemName());
-        if(cond.getMaxPrice() != null) query.setParameter("maxPrice", cond.getMaxPrice());
-
-        return query.getResultList();
+        return em.createQuery(jpql, Item.class).getResultList();
     }
 }
